@@ -126,7 +126,6 @@ public class Program
         using (StreamWriter writer = new StreamWriter("goals.txt"))
         {
             writer.WriteLine(totalPoints);
-            writer.WriteLine(goals.Count);
             foreach (var goal in goals)
             {
                 goal.Save(writer);
@@ -137,13 +136,11 @@ public class Program
 
     public static void LoadGoals()
     {
+        goals.Clear();
         using (StreamReader reader = new StreamReader("goals.txt"))
         {
             totalPoints = int.Parse(reader.ReadLine());
-            int goalsCount = int.Parse(reader.ReadLine());
-            goals = new List<Goal>();
-
-            for (int i = 0; i < goalsCount; i++)
+            while (!reader.EndOfStream)
             {
                 string type = reader.ReadLine();
                 Goal goal = null;
