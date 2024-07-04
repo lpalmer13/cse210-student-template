@@ -2,24 +2,14 @@ using System;
 
 public class Entry
 {
-    public string Prompt { get; }
-    public string Response { get; }
-    public string Date { get; set; }
+    public string Date { get; private set;}
+    public string Prompt { get; private set;}
+    public string Response { get; private set; }
 
-    public Entry(string prompt, string response)
+    public Entry(string date, string prompt, string response)
     {
+        Date = date;
         Prompt = prompt;
         Response = response;
-        Date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-    }
-
-    public override string ToString()
-    {
-        return $"Date: {Date}\nPrompt: {Prompt}\nResponse: {Response}\n";
-    }
-
-    public string ToFileString()
-    {
-        return $"{Date}|{Prompt}|{Response}";
-    }
+    }    
 }

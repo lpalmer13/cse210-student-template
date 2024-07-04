@@ -1,80 +1,51 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 
 public class Journal
 {
-    private List<Entry> entries;
-    
-    public Journal()
-    {
-        entries = new List<Entry>();
-    }
+    private List<Entry> entries = new List<Entry>();
+    private PromptGenerator promptGenerator = new PromptGenerator();
+    private FileHandler fileHandler = new FileHandler();
 
-    public void AddEntry(string prompt)
+    public void WriteEntry()
     {
+        string prompt = promptGenerator.GetRandomPrompt();
+        Console.WriteLine("Choose prompt:");
         Console.WriteLine(prompt);
-        string response = Console.ReadLine();
-        Entry entry = new Entry(prompt, response);
-        entries.Add(entry);
-        Console.WriteLine("Entry added successfully.");
-    }
 
+        Console.WriteLine("Enter your response:");
+        string response = Console.ReadLine();
+
+        Entry entry = new Entry(DateTime.Now.ToString("yyyy-MM-dd"), prompt, response);
+        entries.Add(entry);
+
+        Console.WriteLine("Entry saved. ");
+    }
+    
     public void DisplayEntries()
     {
-        if (entries.Count == 0)
+        foreach (Entry entry in entries)
         {
-            Console.WriteLine("No entries found.");
-            return;
-        }
-
-        foreach (var entry in entries)
-        {
-            Console.WriteLine(entry);
+            Console.WriteLine($"Date: {entry.Date}");
+            Console.WriteLine($"Prompt: {entry.Prompt}");
+            Console.WriteLine($"Response: {entry.Response}");
+            Console.WriteLine();
         }
     }
 
-    public void SaveToFile()
+    public void LoadEntries()
     {
-        Console.WriteLine("Enter the filename to save the journal: ");
+        Console.WriteLine("Enter the filename to load:");
         string filename = Console.ReadLine();
-        using (StreamWriter writer = new StreamWriter(filename))
-        {
-            foreach (var entry in entries)
-            {
-                writer.WriteLine(entry.ToFileString());
-            }       
-        }
-        Console.WriteLine("Journal saved successfully.");
-    }    
-    public void LoadFromFile()
-    {
-        Console.Write("Enter the filename to load the journal: ");
-        string filename = Console.ReadLine();
-        if (!File.Exists(filename))
-        {
-            Console.WriteLine("File not found.");
-            return;
-        }
+        entries = fileHandler.Load(filename);
+        Console.WriteLine("Entries loaded.");
+    }
 
-        entries.Clear();
-        using (StreamReader reader = new StreamReader(filename))
-        {
-            string line;
-            while ((line = reader.ReadLine()) != null)
-            {
-                var parts = line.Split('|');
-                if (parts.Length ==3)
-                {
-                    var entry = new Entry(parts[1], parts[2])
-                    {
-                        Date = parts[0]
-                    };
-                    entries.Add(entry);
-                }
-            }
-        }
-        Console.WriteLine("Journal loaded successfully.");
+    public void SaveEntries()
+    {
+        Console.WriteLine("Enter the filename to save:");
+        string filename = Console.ReadLine();
+        fileHandler.Save(entries, filename);
+        Console.WriteLine("Entries saved.");
     }
 }
-        
