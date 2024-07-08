@@ -1,4 +1,4 @@
-Class Reference
+public Class Reference
 {
     private string _book;
     private int _chapter;
