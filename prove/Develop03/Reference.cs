@@ -13,10 +13,23 @@ public Class Reference
         _endVerse = endVerse == 0 ? startVerse : endVerse;
     }
 
+    public void SetReference(string book, int chapter, int startVerse, int endVerse)
+    {
+        _book = book;
+        _chapter = chapter;
+        _startVerse = startVerse;
+        _endVerse = endVerse;
+    }
+
     public string GetRefernce()
     {
-        return _endVerse == _startVerse
-            ? $"{_book} {_chapter}:{_startVerse}"
-            : $"{_book} {_chapter}:{_starVerse}-{_endVerse}";
+        if (_startVerse == _endVerse)
+        {
+        return $"{_book} {_chapter}:{_startVerse}";
+        }
+        else
+        {
+            return $"{_book} {_chapter}:{_starVerse}-{_endVerse}";
+        }
     }
 }

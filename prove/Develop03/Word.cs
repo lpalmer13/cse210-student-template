@@ -1,4 +1,4 @@
-class Word
+public class Word
 {
     private string _word;
     private bool _hidden;
@@ -7,6 +7,16 @@ class Word
     {
         _word = word;
         _hidden = false;
+    }
+
+    public void SetWord(string word)
+    {
+        _word = word;
+    }
+    
+    public string GetWord()
+    {
+        return _word;
     }
 
     public string GetString()
