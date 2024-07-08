@@ -5,7 +5,7 @@ public Class Reference
     private int _startVerse;
     private int _endVerse;
 
-    public Reference(string book, int chapter, int startVerse, int endVerse = 0)
+    public Reference(string book, int chapter, int startVerse, int endVerse)
     {
         _book = book;
         _chapter = chapter;
