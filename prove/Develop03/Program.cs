@@ -145,8 +145,6 @@ public class Program
             Console.WriteLine("Press Enter to continue.");
             Console.ReadLine();
         }
-
-        Console.WriteLine("Program ended. Thank you for using the Scripture Display program!");
     }
 
     public static void Main(string[] args)
