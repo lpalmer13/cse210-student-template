@@ -1,4 +1,4 @@
-public Class Reference
+public class Reference
 {
     private string _book;
     private int _chapter;
@@ -21,15 +21,15 @@ public Class Reference
         _endVerse = endVerse;
     }
 
-    public string GetRefernce()
+    public string GetReference()
     {
         if (_startVerse == _endVerse)
         {
-        return $"{_book} {_chapter}:{_startVerse}";
+            return $"{_book} {_chapter}:{_startVerse}";
         }
         else
         {
-            return $"{_book} {_chapter}:{_starVerse}-{_endVerse}";
+            return $"{_book} {_chapter}:{_startVerse}-{_endVerse}";
         }
     }
 }

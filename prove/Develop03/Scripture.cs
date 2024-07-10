@@ -1,6 +1,3 @@
-Using.System;
-Using.System.Collections.Generic;
-
 public class Scripture
 {
     private Reference _reference;
@@ -12,26 +9,39 @@ public class Scripture
         _words = words;
     }
 
-    public void SetScripture(Reference reference, List<Word> words)
-    {
-        _reference = reference;
-        _words = words;
-    }
-
-    public string GetScripture()
-    {
-        return $"{_reference.GetRefernce()}: {string.Join(" ", _words.ConverAll(word => word.GetString()))}";
-    }
+    public Reference Reference => _reference;
 
     public void DisplayScripture()
     {
-        Console.WriteLine(GetScripture());
+        Console.WriteLine(_reference.GetReference());
+        foreach (var word in _words)
+        {
+            Console.Write(word.GetWord() + " ");
+        }
+        Console.WriteLine();
     }
 
     public void HideRandom()
     {
-        Random rand = new Random();
-        int index = rand.Next(_words.Count);
-        _words[index].HideWord();
+        Random random = new Random();
+        List<Word> visibleWords = _words.Where(w => !w.GetHidden()).ToList();
+        if (visibleWords.Count == 0)
+        {
+            Console.WriteLine("All words are already hidden.");
+            return;
+        }
+
+        int index = random.Next(visibleWords.Count);
+        visibleWords[index].HideWord();
+    }
+
+    public List<Word> GetHiddenWords()
+    {
+        return _words.Where(w => w.GetHidden()).ToList();
+    }
+
+    public bool AllWordsHidden()
+    {
+        return _words.All(w => w.GetHidden());
     }
 }
