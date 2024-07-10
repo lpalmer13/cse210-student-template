@@ -5,47 +5,36 @@ public class Journal
 {
     private List<Entry> entries = new List<Entry>();
     private PromptGenerator promptGenerator = new PromptGenerator();
-    private FileHandler fileHandler = new FileHandler();
 
     public void WriteEntry()
     {
-        string prompt = promptGenerator.GetRandomPrompt();
-        Console.WriteLine("Choose prompt:");
-        Console.WriteLine(prompt);
-
-        Console.WriteLine("Enter your response:");
+        string prompt = promptGenerator.SelectPrompt();
+        Console.WriteLine($"{prompt}");
+        Console.Write("> ");
         string response = Console.ReadLine();
-
-        Entry entry = new Entry(DateTime.Now.ToString("yyyy-MM-dd"), prompt, response);
+        Entry entry = new Entry(prompt, response,DateTime.Now.ToString());
         entries.Add(entry);
-
         Console.WriteLine("Entry saved. ");
     }
     
-    public void DisplayEntries()
+    public void DisplayJournal()
     {
-        foreach (Entry entry in entries)
+        foreach (var entry in entries)
         {
-            Console.WriteLine($"Date: {entry.Date}");
-            Console.WriteLine($"Prompt: {entry.Prompt}");
-            Console.WriteLine($"Response: {entry.Response}");
-            Console.WriteLine();
+            Console.WriteLine($"\nDate: {entry.Date} - Prompt: {entry.Prompt}");
+            Console.WriteLine($"{entry.Response}");
         }
     }
 
-    public void LoadEntries()
+     public void SaveJournal(string filename)
     {
-        Console.WriteLine("Enter the filename to load:");
-        string filename = Console.ReadLine();
-        entries = fileHandler.Load(filename);
-        Console.WriteLine("Entries loaded.");
+        FileHandler.SaveToFile(entries, filename);
+        Console.WriteLine("Journal saved.");
     }
 
-    public void SaveEntries()
+    public void LoadJournal(string filename)
     {
-        Console.WriteLine("Enter the filename to save:");
-        string filename = Console.ReadLine();
-        fileHandler.Save(entries, filename);
-        Console.WriteLine("Entries saved.");
+        entries = FileHandler.LoadFromFile(filename);
+        Console.WriteLine("Journal loaded.");
     }
 }

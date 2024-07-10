@@ -26,10 +26,26 @@ public class PromptGenerator
         "Write about a dream or aspiration you have for your future, and what steps you can take to move closer to it."
     };
 
-    private Random random = new Random();
-    public string GetRandomPrompt()
+    public string SelectPrompt()
     {
-        int index = random.Next(prompts.Count);
-        return prompts[index];
+        Console.WriteLine("Please select a prompt:");
+        for (int i = 0; i < prompts.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {prompts[i]}\n");
+        }
+
+        int selectedPromptIndex;
+        while (true)
+        {
+            Console.Write("Enter the number of the prompt you want to select: ");
+            if (int.TryParse(Console.ReadLine(), out selectedPromptIndex) &&
+                selectedPromptIndex > 0 && selectedPromptIndex <= prompts.Count)
+            {
+                break;
+            }
+            Console.WriteLine("Invalid selection. Please try again.");
+        }
+
+        return prompts[selectedPromptIndex - 1];
     }
 }
