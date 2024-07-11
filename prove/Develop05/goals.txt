@@ -1,0 +1,3 @@
+20
+Simple,Pee,10,True
+Simple,Poop,10,True

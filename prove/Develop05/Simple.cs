@@ -1,18 +1,22 @@
-using System;
 using System.IO;
 
-public class SimpleGoal : Goal
+class Simple : Goal
 {
     private bool _complete;
 
-    public SimpleGoal(string title, string description, int points) : base(title, description, points)
+    public Simple() { }
+
+    public Simple(string title, int points, bool complete)
     {
-        _complete = false;
+        _title = title;
+        _points = points;
+        _complete = complete;
     }
 
     public override void DisplayGoal()
     {
-        Console.WriteLine($"[Simple] {_title} - {_description} - Points: {_points} - Complete: {_complete}");
+        string status = _complete ? "[X]" : "[ ]";
+        Console.WriteLine($"{status} {_title} - {_description} ({_points} points)");
     }
 
     public override void RecordEvent()
@@ -20,27 +24,16 @@ public class SimpleGoal : Goal
         if (!_complete)
         {
             _complete = true;
-            Console.WriteLine($"Goal '{_title}' Completed! You earned {_points} points.");
+            Console.WriteLine($"{_title} marked as complete. You earned {_points} points.");
         }
         else
         {
-            Console.WriteLine($"Goal '{_title}' is already completed.");
+            Console.WriteLine($"{_title} is already complete.");
         }
     }
     
     public override void Save(StreamWriter writer)
     {
-        writer.WriteLine("SimpleGoal");
-        writer.WriteLine(_title);
-        writer.WriteLine(_description);
-        writer.WriteLine(_points);
-        writer.WriteLine(_complete);
-    }
-    public override void Load(StreamReader reader)
-    {
-        _title = reader.ReadLine();
-        _description = reader.ReadLine();
-        _points = int.Parse(reader.ReadLine());
-        _complete = bool.Parse(reader.ReadLine());
+        writer.WriteLine($"Simple,{_title},{_points},{_complete}");
     }
 }

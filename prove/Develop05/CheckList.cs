@@ -1,54 +1,52 @@
-using System;
 using System.IO;
 
-public class CheckListGoal : Goal
+class CheckList : Goal
 {
     private int _count;
-    private int _targetCount;
-    private int _bonusPoints;
+    private int _target;
 
-    public CheckListGoal(string title, string description, int points, int targetCount, int bonusPoints) : base(title, description, points)
+    public CheckList() { }
+
+    public CheckList(string title, int points, int count, int target)
     {
-        _count = 0;
-        _targetCount = targetCount;
-        _bonusPoints = bonusPoints;
+        _title = title;
+        _points = points;
+        _count = count;
+        _target = target;
     }
 
     public override void DisplayGoal()
     {
-        Console.WriteLine($"[CheckList] {_title} - {_description} - Points per event: {_points} - Times completed: {_count}/{_targetCount} - Bonus: {_bonusPoints}");
+        string status = _count >= _target ? "[X]" : "[ ]";
+        Console.WriteLine($"{status} {_title} - {_description} ({_points} points each time, {_count}/{_target} times completed)");
     }
 
     public override void RecordEvent()
     {
-        _count++;
-        if (_count >= _targetCount)
+        if (_count < _target)
         {
-            Console.WriteLine($"Checklist goal '{_title}' completed! You earned {_points * _targetCount + _bonusPoints} points in total.");
+            _count++;
+            Console.WriteLine($"{_title} recorded {_count}/{_target} times. You earned {_points} points.");
+            if (_count == _target)
+            {
+                Console.WriteLine($"Congratulations! You completed {_title} and earned a bonus of {_points * _target} points.");
+            }
         }
         else
         {
-            Console.WriteLine($"Event recorded for goal '{_title}'. Total completions: {_count}/{_targetCount}. Points earned: {_points * _count}");
+            Console.WriteLine($"{_title} is already complete.");
         }
     }
     
     public override void Save(StreamWriter writer)
     {
-        writer.WriteLine("CheckListGoal");
-        writer.WriteLine(_title);
-        writer.WriteLine(_description);
-        writer.WriteLine(_points);
-        writer.WriteLine(_count);
-        writer.WriteLine(_targetCount);
-        writer.WriteLine(_bonusPoints);
+        writer.WriteLine($"CheckList,{_title},{_points},{_count},{_target}");
     }
-    public override void Load(StreamReader reader)
+
+    public override void InputGoal()
     {
-        _title = reader.ReadLine();
-        _description = reader.ReadLine();
-        _points = int.Parse(reader.ReadLine());
-        _count = int.Parse(reader.ReadLine());
-        _targetCount = int.Parse(reader.ReadLine());
-        _bonusPoints = int.Parse(reader.ReadLine());
+        base.InputGoal();
+        Console.Write("Enter target count: ");
+        _target = int.Parse(Console.ReadLine());
     }
 }
