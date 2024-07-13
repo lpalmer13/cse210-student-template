@@ -1,3 +1,4 @@
-20
-Simple,Pee,10,True
-Simple,Poop,10,True
+Total Score: 20
+Daily Streak: 1
+Simple,Poop the bed,10,True
+Simple,Pee the bed,10,True

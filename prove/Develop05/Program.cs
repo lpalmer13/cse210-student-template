@@ -6,6 +6,8 @@ public class Program
 {
     static List<Goal> goals = new List<Goal>();
     static int totalPoints = 0;
+    static int streak = 0;
+    static DateTime lastRecordDate = DateTime.MinValue;
 
     public static void Main(string[] args)
     {
@@ -23,9 +25,10 @@ public class Program
             Console.WriteLine("  2. Create New Goal");
             Console.WriteLine("  3. Record Event");
             Console.WriteLine("  4. Display Score");
-            Console.WriteLine("  5. Save Goals");
-            Console.WriteLine("  6. Load Goals");
-            Console.WriteLine("  7. Exit");
+            Console.WriteLine("  5. Display Streak");
+            Console.WriteLine("  6. Save Goals");
+            Console.WriteLine("  7. Load Goals");
+            Console.WriteLine("  8. Exit");
             Console.Write("Choose an option: ");
             string choice = Console.ReadLine();
 
@@ -47,13 +50,17 @@ public class Program
             }
             else if (choice == "5")
             {
-                Save();
+                DisplayStreak();
             }
             else if (choice == "6")
             {
-                Load();
+                Save();
             }
             else if (choice == "7")
+            {
+                Load();
+            }
+            else if (choice == "8")
             {
                 exit = true;
             }
@@ -116,6 +123,7 @@ public class Program
             {
                 goal.RecordEvent();
                 totalPoints += goal._points;
+                UpdateStreak();
                 return;
             }
         }
@@ -126,12 +134,35 @@ public class Program
     {
         Console.WriteLine($"\nYou have {totalPoints} points.");
     }
+
+    public static void DisplayStreak()
+    {
+        Console.WriteLine($"\nCurrent Streak: {streak} days");
+    }
+
+    private static void UpdateStreak()
+    {
+        DateTime today = DateTime.Today;
+        if (lastRecordDate == DateTime.MinValue || lastRecordDate < today)
+        {
+            if (lastRecordDate.AddDays(1) == today)
+            {
+                streak++;
+            }
+            else
+            {
+                streak = 1;
+            }
+            lastRecordDate = today;
+        }
+    }
     
     public static void Save()
     {
         using (StreamWriter writer = new StreamWriter("goals.txt"))
         {
-            writer.WriteLine(totalPoints);
+            writer.WriteLine($"Total Score: {totalPoints}");
+            writer.WriteLine($"Daily Streak: {streak}");
             foreach (var goal in goals)
             {
                 goal.Save(writer);
@@ -146,7 +177,18 @@ public class Program
         {
             using (StreamReader reader = new StreamReader("goals.txt"))
             {
-                totalPoints = int.Parse(reader.ReadLine());
+                string totalPointsLine = reader.ReadLine();
+                if (totalPointsLine != null && totalPointsLine.StartsWith("Total Score: "))
+                {
+                    totalPoints = int.Parse(totalPointsLine.Substring("Total Score: ".Length));
+                }
+
+                string streakLine = reader.ReadLine();
+                if (streakLine != null && streakLine.StartsWith("Daily Streak: "))
+                {
+                    streak = int.Parse(streakLine.Substring("Daily Streak: ".Length));
+                }
+
                 goals.Clear();
                 string line;
                 while ((line = reader.ReadLine()) != null)
