@@ -1,6 +1,5 @@
 using System;
 using System.Threading;
-using System.Collections.Generic;
 
 public abstract class Activity
 {
@@ -16,43 +15,50 @@ public abstract class Activity
         _welcome = welcome;
     }
 
-    public void Animation()
+    public int Duration
     {
-        Console.Write(".");
-        Thread.Sleep(500);
+        get { return _duration; }
     }
 
-    public void DefDuration()
+    protected void Animation()
     {
-        Console.Write("Enter the duration of the activity in seconds: ");
-        _duration = int.Parse(Console.ReadLine());
+        for (int i = 0; i < 3; i++)
+        {
+            Console.Write(".");
+            Thread.Sleep(1000);
+        }
+        Console.WriteLine();
     }
 
-    public void DisplayWelcome()
+    protected void DefDuration()
     {
-        Console.WriteLine($"Welcome to the {_title} activity!");
+        Console.Write($"Duration: {_duration} seconds");
+    }
+
+    protected void DisplayWelcome()
+    {
         Console.WriteLine(_welcome);
+        Console.WriteLine($"Activity: {_title}");
+        DefDuration();
         Console.WriteLine("Prepare to begin...");
-        CountDown(5);
+        Animation();
     }
 
-    public void DisplayBye()
+    protected void DisplayBye()
     {
         Console.WriteLine("Good job");
-        CountDown(3);
-        Console.WriteLine($"You have completed the {_title} activity for {_duration} seconds.");
-        CountDown(3);
+        Console.WriteLine($"You have completed the {_title} activity.");
+        Console.WriteLine($"Duration: {_duration} seconds");
+        Animation();
     }
 
-    public void CountDown(int seconds)
+    protected void CountDown(int seconds)
     {
         for (int i = seconds; i > 0; i--)
         {
-            Console.Write(i);
+            Console.WriteLine(i);
             Thread.Sleep(1000);
-            Console.Write("\b \b");
         }
-        Console.WriteLine();
     }
 
     public abstract void ActLoop();

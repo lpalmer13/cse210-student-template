@@ -11,7 +11,7 @@ public class ReflectingActivity : Activity
         "Think of a time when you did something truly selfless."
     };
 
-    private List<string> _questions = new List<string>
+    private List<string> _reflectQuestions = new List<string>
     {
         "Why was this experience meaningful to you?",
         "Have you ever done anything like this before?",
@@ -24,22 +24,24 @@ public class ReflectingActivity : Activity
         "How can you keep this experience in mind in the future?"
     };
 
-    public ReflectingActivity() : base("Reflecting", 0, "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.")
+    public ReflectingActivity(int duration)
+         : base("Reflecting", duration, "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.")
     {
     }
     
     public override void ActLoop()
     {
         DisplayWelcome();
-        DefDuration();
-
         Random random = new Random();
-        Console.WriteLine(_reflectPrompts[random.Next(_reflectPrompts.Count)]);
-        CountDown(5);
+        string prompt = _reflectPrompts[random.Next(_reflectPrompts.Count)];
+        Console.WriteLine(prompt);
+        Animation();
 
-        for (int i = 0; i < _duration; i += 5)
+        for (int i = 0; i < Duration; i += 10)
         {
-            Console.WriteLine(_questions[random.Next(_questions.Count)]);
+            string question = _reflectQuestions[random.Next(_reflectQuestions.Count)];
+            Console.WriteLine(question);
+            Animation();
         }
 
         DisplayBye();

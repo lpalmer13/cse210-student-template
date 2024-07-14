@@ -12,28 +12,39 @@ public class Program
             Console.WriteLine("3. Listing");
             Console.WriteLine("4. Exit");
 
-            int choice = int.Parse(Console.ReadLine());
-            Activity activity;
+            string choice = Console.ReadLine();
+            Activity activity = null;
 
-            switch (choice)
+            if (choice == "1")
             {
-                case 1:
-                    activity = new BreathingActivity();
-                    break;
-                case 2:
-                    activity = new ReflectingActivity();
-                    break;
-                case 3:
-                    activity = new ListingActivity();
-                    break;
-                case 4:
-                    return;
-                default:
-                    Console.WriteLine("Invalid choice. Please try again.");
-                    continue;
+                activity = new BreathingActivity(GetDuration());
+            }
+            else if (choice == "2")
+            {
+                activity = new ReflectingActivity(GetDuration());
+            }
+            else if (choice == "3")
+            {
+                activity = new ListingActivity(GetDuration());
+            }
+            else if (choice == "4")
+            {
+                return;
+            }
+            else
+            {
+                Console.WriteLine("Invalid choice, please try again.");
+                continue;
             }
 
             activity.ActLoop();
         }
+    }
+
+    static int GetDuration()
+    {
+        Console.WriteLine("Enter the duration in seconds:");
+        int duration = int.Parse(Console.ReadLine());
+        return duration;
     }
 }

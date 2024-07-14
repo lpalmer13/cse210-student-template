@@ -12,24 +12,25 @@ public class ListingActivity : Activity
         "Who are some of your personal heroes?"
     };
 
-    public ListingActivity() : base("Listing", 0, "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.")
+    public ListingActivity(int duration)
+        : base("Listing", 0, "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.")
     {
     }
 
     public override void ActLoop()
     {
         DisplayWelcome();
-        DefDuration();
-
         Random random = new Random();
-        Console.WriteLine(_listPrompts[random.Next(_listPrompts.Count)]);
-        CountDown(5);
+        string prompt = _listPrompts[random.Next(_listPrompts.Count)];
+        Console.WriteLine(prompt);
+        Animation();
 
         List<string> items = new List<string>();
-        for (int i = 0; i < _duration; i += 10)
+        for (int i = 0; i < Duration; i++)
         {
             Console.WriteLine("Enter an item: ");
-            items.Add(Console.ReadLine());
+            string item = Console.ReadLine();
+            items.Add(item);
         }
 
         Console.WriteLine($"You listed {items.Count} itemms.");
