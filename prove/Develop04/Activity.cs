@@ -40,16 +40,17 @@ public abstract class Activity
         Console.WriteLine(_welcome);
         Console.WriteLine($"Activity: {_title}");
         DefDuration();
-        Console.WriteLine("Prepare to begin...");
+        Console.WriteLine("\nPrepare to begin...");
         Animation();
     }
 
     protected void DisplayBye()
     {
-        Console.WriteLine("Good job");
-        Console.WriteLine($"You have completed the {_title} activity.");
+        Console.WriteLine("Good job!");
+        Console.WriteLine($"You have completed the {_title} activity.!");
         Console.WriteLine($"Duration: {_duration} seconds");
         Animation();
+        Log.LogActivity(_title, _duration);
     }
 
     protected void CountDown(int seconds)

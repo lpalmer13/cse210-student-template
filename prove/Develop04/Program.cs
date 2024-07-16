@@ -10,7 +10,8 @@ public class Program
             Console.WriteLine("1. Breathing");
             Console.WriteLine("2. Reflecting");
             Console.WriteLine("3. Listing");
-            Console.WriteLine("4. Exit");
+            Console.WriteLine("4. View Activity Log");
+            Console.WriteLine("5. Exit");
 
             string choice = Console.ReadLine();
             Activity activity = null;
@@ -28,6 +29,11 @@ public class Program
                 activity = new ListingActivity(GetDuration());
             }
             else if (choice == "4")
+            {
+                Log.DisplayLog();
+                continue;
+            }
+            else if (choice == "5")
             {
                 return;
             }
