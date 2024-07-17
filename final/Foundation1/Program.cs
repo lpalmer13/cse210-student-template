@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 class Program
 { 
-    static void Main()
+    static void Main(string[] args)
     {
         Video video1 = new Video("Video 1", "Author 1", 300);
         Video video2 = new Video("Video 2", "Author 2", 600);
