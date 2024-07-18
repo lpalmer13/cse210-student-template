@@ -5,31 +5,30 @@ class Program
 { 
     static void Main(string[] args)
     {
-        Video video1 = new Video("Video 1", "Author 1", 300);
-        Video video2 = new Video("Video 2", "Author 2", 600);
-        Video video3 = new Video("Video 3", "Author 3", 900);
+        Video video1 = new Video("Epic Fart Prank on Strangers", "GilstrapTV", 600);
+        Video video2 = new Video("Farting in Elevator Prank", "GilstrapTV", 480);
+        Video video3 = new Video("Office Fart Prank Compilation", "GilstrapTV", 900);
 
-        video1.AddComment(new Comment("User 1", "Great video!"));
-        video1.AddComment(new Comment("User 2", "Very informative."));
-        video1.AddComment(new Comment("User 3", "I loved it!"));
-        video1.AddComment(new Comment("User 4", "Nice explanation."));
-        video1.AddComment(new Comment("User 5", "Helped me a lot."));
-        video1.AddComment(new Comment("User 6", "Well don!"));
+        video1.AddComment(new Comment("PrankLover", "I couldn't stop laughing! Epic prank!"));
+        video1.AddComment(new Comment("LaughOutLoud", "This made my day. So funny!"));
+        video1.AddComment(new Comment("ComedyKing", "GilstrapTV, you are the best at pranks."));
+        video1.AddComment(new Comment("Giggles", "The reactions were priceless!"));
+        video1.AddComment(new Comment("Jokester", "I'm crying from laughing so hard."));
+        video1.AddComment(new Comment("FartFanatic", "That was too good. Keep it up!"));
 
-        video2.AddComment(new Comment("User 7", "Nice work!"));
-        video2.AddComment(new Comment("User 8", "Keep it up."));
-        video2.AddComment(new Comment("User 9", "Awesome content."));
-        video2.AddComment(new Comment("User 10", "Very helpful."));
-        video2.AddComment(new Comment("User 11", "Learned a lot."));
-        video2.AddComment(new Comment("User 12", "Good job!"));
+        video2.AddComment(new Comment("ElevatorEscape", "Imagine being stuck in that elevator. Hilarious!"));
+        video2.AddComment(new Comment("TrappedInLaughs", "The best elevator prank ever."));
+        video2.AddComment(new Comment("FunnyBone", "I can't get enough of these pranks."));
+        video2.AddComment(new Comment("Prankster", "GilstrapTV, you never disappoint."));
+        video2.AddComment(new Comment("LMAO", "That was savage and funny."));
+        video2.AddComment(new Comment("ElevatorPrankster", "Brilliant execution. Loved every second."));
         
-        video3.AddComment(new Comment("User 13", "This is amazing!"));
-        video3.AddComment(new Comment("User 14", "Fantastic explanation."));
-        video3.AddComment(new Comment("User 15", "Really helpful."));
-        video3.AddComment(new Comment("User 16", "Great content."));
-        video3.AddComment(new Comment("User 17", "Very well presented."));
-        video3.AddComment(new Comment("User 18", "Excellent video!"));
-
+        video3.AddComment(new Comment("OfficePrankster", "Best compilation of office pranks I've seen."));
+        video3.AddComment(new Comment("DeskJester", "My coworkers would freak out if I did this."));
+        video3.AddComment(new Comment("LaughingOutLoud", "This is why I love your channel."));
+        video3.AddComment(new Comment("PrankCompilationFan", "Never laughed so hard. Amazing job!"));
+        video3.AddComment(new Comment("OfficeHumor", "I needed this laugh today. Thanks!"));
+        video3.AddComment(new Comment("GilstrapFan", "You are the king of pranks, GilstrapTV!"));
 
         List<Video> videos = new List<Video> { video1, video2, video3 };
     
