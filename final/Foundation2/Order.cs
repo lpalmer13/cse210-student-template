@@ -6,11 +6,13 @@ public class Order
 {
     private List<Product> products;
     private Customer customer;
+    private double shippingCost;
 
     public Order(Customer customer)
     {
         products = new List<Product>();
         this.customer = customer;
+        shippingCost = customer.IsInUSA() ? 5 : 35;
     }
 
     public void AddProduct(Product product)
@@ -25,17 +27,7 @@ public class Order
         {
             totalCost += product.CalculateTotalCost();
         }
-
-        if (customer.IsInUSA())
-        {
-            totalCost += 5;
-        }
-        else
-        {
-            totalCost += 35;
-        }
-
-        return totalCost;
+        return totalCost + shippingCost;
     }
 
     public string GetPackingLabel()
@@ -43,13 +35,14 @@ public class Order
         StringBuilder label = new StringBuilder();
         foreach (var product in products)
         {
-            label.AppendLine($"Product Name: {product.Name}, Product ID: {product.ProductId}");
+            double productCost = product.CalculateTotalCost();
+            label.AppendLine($"Product Name: {product.Name}, Product ID: {product.ProductId}, Quantity: {product.Quantity}, Cost: ${productCost}");
         }
         return label.ToString();
     }
 
     public string GetShippingLabel()
     {
-        return $"Customer Name: {customer.Name}\nAddress: {customer.Address.GetAddressString()}";
+        return $"Customer Name: {customer.Name}\nAddress: {customer.Address.GetAddressString()}\nShipping Cost: ${shippingCost}";
     }
 }

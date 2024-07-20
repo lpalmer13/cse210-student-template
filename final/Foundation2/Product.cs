@@ -13,11 +13,32 @@ public class Product
         this.quantity = quantity;
     }
 
+    public string Name
+    {
+        get { return name; }
+        set { name = value; }
+    }
+
+    public int ProductId
+    {
+        get { return productId; }
+        set { productId = value; }
+    }
+
+    public double PricePerUnit
+    {
+        get { return pricePerUnit; }
+        set { pricePerUnit = value; }
+    }
+
+    public int Quantity
+    {
+        get { return quantity; }
+        set { quantity = value; }
+    }
+    
     public double CalculateTotalCost()
     {
         return pricePerUnit * quantity;
     }
-
-    public string Name { get { return name; } }
-    public int ProductId { get { return productId; } }
 }

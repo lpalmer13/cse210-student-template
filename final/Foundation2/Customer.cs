@@ -9,11 +9,20 @@ public class Customer
         this.address = address;
     }
 
+    public string Name
+    {
+        get { return name; }
+        set { name = value; }
+    }
+
+    public Address Address
+    {
+        get { return address; }
+        set { address = value; }
+    }
+
     public bool IsInUSA()
     {
         return address.IsInUSA();
     }
-
-    public string Name { get { return name; } }
-    public Address Address { get { return address; } }
 }
