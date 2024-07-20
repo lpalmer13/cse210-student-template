@@ -27,6 +27,6 @@ public class Running : Activity
 
     public override string GetSummary()
     {
-        return $"{Date.ToString("dd MMM yyyy")} Running ({Minutes} min): Distance {GetDistance():0.0} km, Speed {GetSpeed():0.0} kph, Pace: {GetPace():0.0} min per km";
+        return $"{Date.ToString("MMMM dd, yyyy")} Running ({Minutes} min): Distance {GetDistance():0.0} miles, Speed {GetSpeed():0.0} mph, Pace: {GetPace():0.0} min per mile";
     }
 }

@@ -7,8 +7,8 @@ class Program
     {
         List<Activity> activities = new List<Activity>
         {
-            new Running(new DateTime(2023, 11, 3), 30, 4.8),
-            new Cycling(new DateTime(2023, 11, 4), 45, 20),
+            new Running(new DateTime(2023, 11, 3), 60, 6),
+            new Cycling(new DateTime(2023, 11, 4), 60, 15),
             new Swimming(new DateTime(2023, 11, 5), 60, 30)
         };
 

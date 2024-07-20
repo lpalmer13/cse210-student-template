@@ -12,7 +12,7 @@ public class Swimming : Activity
 
     public override double GetDistance()
     {
-        return (laps *50) / 1000.0;
+        return (laps * 50 * 0.00062);
     }
 
     public override double GetSpeed()
@@ -27,6 +27,6 @@ public class Swimming : Activity
 
     public override string GetSummary()
     {
-        return $"{Date.ToString("dd MMM yyyy")} Swimming ({Minutes} min): Distance {GetDistance():0.0} km, Speed {GetSpeed():0.0} kph, Pace: {GetPace():0.0} min per km";
+        return $"{Date.ToString("MMMM dd, yyyy")} Swimming ({Minutes} min): Distance {GetDistance():0.0} miles, Speed {GetSpeed():0.0} mph, Pace: {GetPace():0.0} min per mile";
     }
 }
