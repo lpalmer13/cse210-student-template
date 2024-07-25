@@ -4,8 +4,8 @@ public class Swimming : Activity
 {
     private int laps;
 
-    public Swimming(DateTime date, int minutes, int laps)
-        : base(date, minutes)
+    public Swimming(DateTime date, int minutes, int laps, int farts)
+        : base(date, minutes, farts)
     {
         this.laps = laps;
     }
@@ -27,6 +27,6 @@ public class Swimming : Activity
 
     public override string GetSummary()
     {
-        return $"{Date.ToString("MMMM dd, yyyy")} Swimming ({Minutes} min): Distance {GetDistance():0.0} miles, Speed {GetSpeed():0.0} mph, Pace: {GetPace():0.0} min per mile";
+        return $"{Date.ToString("MMMM dd, yyyy")} Swimming ({Minutes} min): Distance {GetDistance():0.0} miles, Speed {GetSpeed():0.0} mph, Pace: {GetPace():0.0} min per mile, Farts: {Farts}";
     }
 }

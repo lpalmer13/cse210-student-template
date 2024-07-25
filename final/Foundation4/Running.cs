@@ -4,8 +4,8 @@ public class Running : Activity
 {
     private double distance;
 
-    public Running(DateTime date, int minutes, double distance)
-        : base(date, minutes)
+    public Running(DateTime date, int minutes, double distance, int farts)
+        : base(date, minutes, farts)
     {
         this.distance = distance;
     }
@@ -27,6 +27,6 @@ public class Running : Activity
 
     public override string GetSummary()
     {
-        return $"{Date.ToString("MMMM dd, yyyy")} Running ({Minutes} min): Distance {GetDistance():0.0} miles, Speed {GetSpeed():0.0} mph, Pace: {GetPace():0.0} min per mile";
+        return $"{Date.ToString("MMMM dd, yyyy")} Running ({Minutes} min): Distance {GetDistance():0.0} miles, Speed {GetSpeed():0.0} mph, Pace: {GetPace():0.0} min per mile, Farts: {Farts}";
     }
 }
